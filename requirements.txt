@@ -1,0 +1,6 @@
+numpy
+matplotlib
+lmfit
+scipy
+corner 
+tqdm

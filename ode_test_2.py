@@ -1,11 +1,12 @@
 ###################################
 # Virus-IFN model parameter fitting
-# Emily Ackerman 
+# Emily Ackerman
 # August 2020
 ###################################
 
 import numpy as np
 import matplotlib.pyplot as plt
+
 from lmfit import minimize, Parameters, Parameter, report_fit
 from lmfit.model import save_modelresult
 from lmfit.printfuncs import *
@@ -42,7 +43,7 @@ def g(t, u0, p):
     sol = odeint(f2, u0, t, args=(p,))
     return sol
 
-# residual error 
+
 def residual(p, t, data):
     u0 = [6.382, 0.26]
     model = g(t, u0, p)

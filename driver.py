@@ -47,8 +47,8 @@ def g(t, u0, p):
 
 def residual(p, t, data):
     """Return residual error"""
-    U0 = [6.382, 0.26]
-    model = g(t, U0, p)
+    u0 = [6.382, 0.26]
+    model = g(t, u0, p)
     err = np.square(model - data) # sum of squared errors
     err = err[~np.isnan(err)]
     err = (err/np.size(err)).ravel()
@@ -59,8 +59,8 @@ def residual(p, t, data):
 
 
 #initial conditions for state, time span
-U0 = [1.66,0.0]
-TSPAN = (0., 100.)
+u0 = [1.66,0.0]
+tspan = (0., 100.)
 
 # set initial parameters with bounds
 params = Parameters()
@@ -90,7 +90,7 @@ axs[1].set_title('IFN')
 axs[1].set_xlabel('days')
 axs[1].set_ylabel('Gene expression')
 
-plt.savefig('fits.pdf')
+#plt.savefig('fits.pdf')
 
 # display fitted statistics
 report_fit(result)
@@ -105,7 +105,7 @@ plt.savefig('acceptance.pdf')
 # create corner plot of parameter distributions
 emcee_plot = corner.corner(result.flatchain, labels=result.var_names,
                            truths=list(result.params.valuesdict().values()))
-plt.savefig('corner.pdf')
+#plt.savefig('corner.pdf')
 
 highest_prob = np.argmax(result.lnprob)
 hp_loc = np.unravel_index(highest_prob, result.lnprob.shape)
